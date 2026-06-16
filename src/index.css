@@ -1,0 +1,198 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: theme('fontFamily.body');
+    background-color: theme('colors.night.900');
+    color: theme('colors.cream.DEFAULT');
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: theme('colors.ember.DEFAULT');
+    color: theme('colors.night.900');
+  }
+
+  /* Custom scrollbar — warm, thin */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: theme('colors.night.800');
+  }
+  ::-webkit-scrollbar-thumb {
+    background: theme('colors.bubble.deep');
+    border-radius: 9999px;
+    border: 2px solid theme('colors.night.800');
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.bubble.DEFAULT');
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: theme('fontFamily.display');
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer components {
+  /* Glassmorphic surface — the signature material */
+  .glass {
+    background: linear-gradient(
+      135deg,
+      rgba(244, 234, 219, 0.07),
+      rgba(244, 234, 219, 0.02)
+    );
+    backdrop-filter: blur(18px) saturate(120%);
+    -webkit-backdrop-filter: blur(18px) saturate(120%);
+    border: 1px solid rgba(244, 234, 219, 0.12);
+    border-radius: 1.5rem;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.32),
+      inset 0 1px 0 rgba(244, 234, 219, 0.1);
+  }
+
+  .glass-strong {
+    background: linear-gradient(
+      135deg,
+      rgba(28, 16, 9, 0.86),
+      rgba(18, 10, 6, 0.78)
+    );
+    backdrop-filter: blur(24px) saturate(130%);
+    -webkit-backdrop-filter: blur(24px) saturate(130%);
+    border: 1px solid rgba(199, 160, 106, 0.18);
+    border-radius: 1.5rem;
+    box-shadow:
+      0 24px 60px -20px rgba(0, 0, 0, 0.55),
+      inset 0 1px 0 rgba(244, 234, 219, 0.1);
+  }
+
+  /* Gold gradient text */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #ffe3a3 0%, #f5c761 40%, #e8893a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Candy gradient text — amber → rose (refined) */
+  .text-candy-gradient {
+    background: linear-gradient(96deg, #e9a857 8%, #d97d86 86%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Soft blush cheeks — used on faces */
+  .blush {
+    background: radial-gradient(circle, rgba(217, 125, 134, 0.55), transparent 70%);
+    border-radius: 9999px;
+  }
+
+  /* Hairline divider with a warm glow */
+  .rule {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(245, 199, 97, 0.4),
+      transparent
+    );
+  }
+
+  /* Signature CTA — amber → rose, soft and refined */
+  .btn-ember {
+    position: relative;
+    background: linear-gradient(96deg, #e9a857, #d97d86);
+    color: #2a1810;
+    font-weight: 600;
+    border-radius: 9999px;
+    box-shadow:
+      0 0 0 1px rgba(244, 234, 219, 0.08),
+      0 14px 44px -14px rgba(233, 168, 87, 0.6);
+    transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1),
+      box-shadow 0.3s ease;
+  }
+  .btn-ember:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 0 1px rgba(244, 234, 219, 0.14),
+      0 22px 56px -14px rgba(233, 168, 87, 0.75);
+  }
+  .btn-ember:active {
+    transform: translateY(0) scale(0.99);
+  }
+
+  .btn-ghost {
+    border: 1px solid rgba(246, 236, 217, 0.22);
+    color: theme('colors.cream.DEFAULT');
+    border-radius: 9999px;
+    transition: all 0.25s ease;
+    background: rgba(246, 236, 217, 0.04);
+  }
+  .btn-ghost:hover {
+    border-color: rgba(245, 199, 97, 0.5);
+    background: rgba(245, 199, 97, 0.08);
+  }
+}
+
+@layer utilities {
+  .iso {
+    transform: rotateX(55deg) rotateZ(-45deg);
+    transform-style: preserve-3d;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* warm grain / noise overlay */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
